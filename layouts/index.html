@@ -1,24 +1,4 @@
 {{ define "main" }}
-
-<article class="max-w-full prose dark:prose-invert">
-	{{ range first 1 .Site.Pages "Type" "post" }}
-	
-    {{ with .Title }}
-	<header>
-	  <h1>{{ . | emojify }}</h1>
-	</header>
-    {{ end }}
-
-  <section>{{ .Summary | emojify }}</section>
-  <div class="post-meta">
-	  <a href="{{ .Permalink }}" class="u-url">
-	  <aside class="dates">
-		<time datetime="{{ .Date.Format "2006-01-02 15:04:05 -0700" }}" class="dt-published">→ {{ .Date.Format "3:04 PM, Jan 2" }}</time>
-	  </aside>
-	</a>
-  </div>
-  {{ end }}
-</article>
 <section>
   <h2 class="mt-8 text-2xl font-extrabold">{{ i18n "shortcode.recent_articles" | emojify }}</h2>
   {{ $paginator := .Paginate (where .Site.Pages "Type" "post") }}
