@@ -1,8 +1,7 @@
 {{ define "main" }}
 
 <article class="max-w-full prose dark:prose-invert">
-	{{ $paginator := .Paginate (.Site.Pages.ByDate.Reverse "Type" "post") }}
-	{{ range first 1 $paginator.Pages }}  
+	{{ range first 1 .Site.Pages "Type" "post" }}
 	
     {{ with .Title }}
 	<header>
@@ -22,7 +21,7 @@
 </article>
 <section>
   <h2 class="mt-8 text-2xl font-extrabold">{{ i18n "shortcode.recent_articles" | emojify }}</h2>
-  {{ $paginator := .Paginate (.Site.Pages.ByDate.Reverse "Type" "post") }}
+  {{ $paginator := .Paginate (where .Site.Pages "Type" "post") }}
   {{ range first 5 (after 1 $paginator.Pages) }}  
 	  {{ partial "article-link.html" . }}
   {{ end }}
