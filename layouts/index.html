@@ -1,0 +1,39 @@
+{{ define "main" }}
+
+<article class="max-w-full prose dark:prose-invert">
+	{{ $paginator := .Paginate (.Site.Pages.ByDate.Reverse "Type" "post") }}
+	{{ range first 1 $paginator.Pages }}  
+	
+    {{ with .Title }}
+	<header>
+	  <h1>{{ . | emojify }}</h1>
+	</header>
+    {{ end }}
+
+  <section>{{ .Summary | emojify }}</section>
+  <div class="post-meta">
+	  <a href="{{ .Permalink }}" class="u-url">
+	  <aside class="dates">
+		<time datetime="{{ .Date.Format "2006-01-02 15:04:05 -0700" }}" class="dt-published">→ {{ .Date.Format "3:04 PM, Jan 2" }}</time>
+	  </aside>
+	</a>
+  </div>
+  {{ end }}
+</article>
+<section>
+  <h2 class="mt-8 text-2xl font-extrabold">{{ i18n "shortcode.recent_articles" | emojify }}</h2>
+  {{ $paginator := .Paginate (.Site.Pages.ByDate.Reverse "Type" "post") }}
+  {{ range first 5 (after 1 $paginator.Pages) }}  
+	  {{ partial "article-link.html" . }}
+  {{ end }}
+</section>
+
+{{ if .IsHome }}
+	{{ if .Site.Params.paginate_home }}
+		{{ partial "pagination" . }}
+	{{ end }}
+{{ else if .Site.Params.paginate_categories }}
+	{{ partial "pagination" . }}
+{{ end }}
+
+{{ end }}

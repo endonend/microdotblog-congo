@@ -1,0 +1,10 @@
+{{ with .Site.Params.logo_url }}
+  <img src="{{ . }}" alt="{{ .Site.Title }}" height="40" width="200" />
+{{ else }}
+  <a
+    class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+    rel="me"
+    href="{{ "" | relLangURL }}"
+    >{{ .Site.Title }}</a
+  >
+{{ end }}

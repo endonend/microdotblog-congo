@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" data-default-appearance="light" data-auto-appearance="true">
+    <head>
+        {{ partial "head.html" . }}
+    </head>
+<body class="flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32">
+  {{ partial "partials/basic-header.html" . }}
+  <div class="relative flex flex-col grow">
+  <main id="main-content" class="grow">
+        {{ block "main" . }}{{ end }}
+  </main>
+    {{- partial "footer.html" . -}}
+    {{ partial "custom_footer.html" . }}
+    {{ range .Site.Params.plugins_js }}
+      <script src="{{ . }}"></script>
+    {{ end }}
+  </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{{ define "main" }}
+  <article>
+    <header class="max-w-prose">
+      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        {{ .Title | emojify }}
+      </h1>
+      <div class="mt-8 mb-12 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+        <a href="{{ .Permalink }}" class="u-url">
+        <aside class="dates">
+          <time datetime="{{ .Date.Format "2006-01-02 15:04:05 -0700" }}" class="dt-published">→ {{ .Date.Format "3:04 PM, Jan 2" }}</time>
+        </aside>
+        </a>
+      </div>
+    </header>
+    <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+      <div class="min-w-0 min-h-0 max-w-prose grow">
+        {{ .Content | emojify }}
+      </div>
+    </section>
+    <footer class="pt-8 max-w-prose print:hidden">
+      {{ partial "author.html" . }}
+      {{ partial "article-pagination.html" . }}
+    </footer>
+  </article>
+{{ end }}
